@@ -18,15 +18,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOo-wN-W16">
-                                <rect key="frame" x="275.5" y="284.5" width="49" height="30"/>
+                                <rect key="frame" x="276" y="285" width="49" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Record"/>
+                                <connections>
+                                    <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="04a-b8-V5H"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aq8-Ql-EFT">
+                                <rect key="frame" x="249" y="339" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGr-hK-JIa">
+                                <rect key="frame" x="247" y="378" width="106" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Stop Recording"/>
+                                <connections>
+                                    <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LtS-0T-cwW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aOo-wN-W16" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9e2-zD-2O1"/>
+                            <constraint firstItem="aq8-Ql-EFT" firstAttribute="centerX" secondItem="CGr-hK-JIa" secondAttribute="centerX" id="U0u-89-Vfn"/>
+                            <constraint firstItem="aq8-Ql-EFT" firstAttribute="top" secondItem="aOo-wN-W16" secondAttribute="bottom" constant="24" id="Zu1-rJ-MiE"/>
+                            <constraint firstItem="CGr-hK-JIa" firstAttribute="top" secondItem="aq8-Ql-EFT" secondAttribute="bottom" constant="18" id="a9M-Vy-Fyp"/>
                             <constraint firstItem="aOo-wN-W16" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="l4V-OY-sg6"/>
+                            <constraint firstItem="aq8-Ql-EFT" firstAttribute="centerX" secondItem="aOo-wN-W16" secondAttribute="centerX" id="ma8-Kj-Czp"/>
                         </constraints>
                     </view>
                 </viewController>
