@@ -50,6 +50,9 @@
                             <constraint firstItem="aq8-Ql-EFT" firstAttribute="centerX" secondItem="aOo-wN-W16" secondAttribute="centerX" id="ma8-Kj-Czp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="recordingLabel" destination="aq8-Ql-EFT" id="gxT-eE-Bfy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
