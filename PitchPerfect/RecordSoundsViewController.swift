@@ -59,5 +59,32 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
     }
+    
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        if flag {
+            self.performSegueWithIdentifier("playRecording", sender: audioRecorder.url)
+        } else {
+            print("saving the recording failed with error")
+        }
+    }
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if let identifier = segue.identifier {
+            if identifier == "playRecording" {
+                let playSoundsVc = segue.destinationViewController as! PlaySoundsViewController
+                let recordedAudioUrl = sender as! NSURL
+                playSoundsVc.recordedAudioUrl = recordedAudioUrl
+            }
+        }
+    }
 }
+    
+
+
 
