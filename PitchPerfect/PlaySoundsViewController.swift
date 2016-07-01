@@ -18,39 +18,39 @@ class PlaySoundsViewController: UIViewController {
     @IBOutlet weak var reverbButton: UIButton!
     @IBOutlet weak var stopPlayingButton: UIButton!
     
-    @IBAction func playSound(sender: UIButton) {
+    @IBAction func playSound(_ sender: UIButton) {
         switch ButtonType(rawValue: sender.tag)! {
-        case .Slow :
+        case .slow :
             playSound(rate: 0.5)
-        case .Fast:
+        case .fast:
             playSound(rate: 1.5)
-        case .Darth:
+        case .darth:
             playSound(pitch: -1000)
-        case .Chip:
+        case .chip:
             playSound(pitch: 1000)
-        case .Echo:
+        case .echo:
             playSound(echo: true)
-        case .Reverb:
+        case .reverb:
             playSound(reverb: true)
         }
         
-        configureUI(.Playing)
+        configureUI(.playing)
     }
     
     
-    @IBAction func stopPlaying(sender: UIButton) {
+    @IBAction func stopPlaying(_ sender: UIButton) {
         stopAudio()
-        configureUI(.NotPlaying)
+        configureUI(.notPlaying)
     }
     
-    var recordedAudioUrl: NSURL!
+    var recordedAudioUrl: URL!
     var audioFile: AVAudioFile!
     var audioEngine: AVAudioEngine!
     var audioPlayerNode: AVAudioPlayerNode!
-    var stopTimer: NSTimer!
+    var stopTimer: Timer!
     
     enum ButtonType: Int {
-        case Slow, Fast, Darth, Chip, Echo, Reverb
+        case slow, fast, darth, chip, echo, reverb
     }
     
     override func viewDidLoad() {
@@ -60,8 +60,8 @@ class PlaySoundsViewController: UIViewController {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
-        configureUI(.NotPlaying)
+    override func viewWillAppear(_ animated: Bool) {
+        configureUI(.notPlaying)
     }
     
     override func didReceiveMemoryWarning() {

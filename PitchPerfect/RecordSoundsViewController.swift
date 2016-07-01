@@ -20,7 +20,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        stopRecordingButton.hidden = true
+        stopRecordingButton.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,40 +29,40 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
 
 
-    @IBAction func recordAudio(sender: UIButton) {
+    @IBAction func recordAudio(_ sender: UIButton) {
         recordingLabel.text = "Recording"
-        sender.hidden = true
-        stopRecordingButton.hidden = false
+        sender.isHidden = true
+        stopRecordingButton.isHidden = false
         
-        let dirpath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let dirpath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let recordingName = "pitchPerfectRecording.wav"
         let pathArray = [dirpath, recordingName]
-        let filePath = NSURL.fileURLWithPathComponents(pathArray)
+        let filePath = URL.fileURL(withPathComponents: pathArray)
         print(filePath)
         
         //there is only one audio hardware, so you have to grab the only audio hardware available to all apps. This is a singleton.
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
         
-        try! audioRecorder = AVAudioRecorder(URL: filePath!, settings: [:])
+        try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
         audioRecorder.delegate = self
-        audioRecorder.meteringEnabled = true
+        audioRecorder.isMeteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
         
     }
-    @IBAction func stopRecording(sender: UIButton) {
+    @IBAction func stopRecording(_ sender: UIButton) {
         recordingLabel.text = "Tap to Record"
-        sender.hidden = true
-        recordButton.hidden = false
+        sender.isHidden = true
+        recordButton.isHidden = false
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
     }
     
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
-            self.performSegueWithIdentifier("playRecording", sender: audioRecorder.url)
+            self.performSegue(withIdentifier: "playRecording", sender: audioRecorder.url)
         } else {
             print("saving the recording failed with error")
         }
@@ -72,13 +72,13 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let identifier = segue.identifier {
             if identifier == "playRecording" {
                 let playSoundsVc = segue.destinationViewController as! PlaySoundsViewController
-                let recordedAudioUrl = sender as! NSURL
+                let recordedAudioUrl = sender as! URL
                 playSoundsVc.recordedAudioUrl = recordedAudioUrl
             }
         }
