@@ -19,6 +19,7 @@ class PlaySoundsViewController: UIViewController {
     @IBOutlet weak var stopPlayingButton: UIButton!
     
     @IBAction func playSound(sender: UIButton) {
+        stopAudio()
         switch ButtonType(rawValue: sender.tag)! {
         case .Slow :
             playSound(rate: 0.5)
