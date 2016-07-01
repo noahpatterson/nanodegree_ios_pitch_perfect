@@ -37,12 +37,17 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let dirpath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let recordingName = "pitchPerfectRecording.wav"
         let pathArray = [dirpath, recordingName]
-        let filePath = URL.fileURL(withPathComponents: pathArray)
+//        let filePath = URL.fileURL(withPathComponents: pathArray)
+        
+        let filePath = NSURL.fileURL(withPathComponents: pathArray)
         print(filePath)
         
         //there is only one audio hardware, so you have to grab the only audio hardware available to all apps. This is a singleton.
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        
+        //set speaker?
+        try! session.overrideOutputAudioPort(.speaker)
         
         try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
         audioRecorder.delegate = self
